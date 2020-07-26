@@ -4,6 +4,7 @@
 // I AM NOT DONE
 
 enum Message {
+    Quit,Move{x: i32, y: i32 },Echo(String),ChangeColor(i32, i32, i32)
     // TODO: implement the message variant types based on their usage below
 }
 
@@ -36,6 +37,15 @@ impl State {
     }
 
     fn process(&mut self, message: Message) {
+        match message{
+            Message:: Quit  => {println!("The Quit variant has no data to destructure.")},
+            Message:: Move{ x,y} => { println!(
+                "Move in the x direction {} and in the y direction {}",
+                x, y
+            );} ,
+            Message:: Echo(text) =>println!("Text message: {}", text),
+            Message:: ChangeColor( r,g,b) => println!( "Change the color to red {}, green {}, and blue {}",r, g, b)
+        }
         // TODO: create a match expression to process the different message variants
     }
 }
@@ -47,9 +57,9 @@ mod tests {
     #[test]
     fn test_match_message_call() {
         let mut state = State{
-            quit: false,
-            position: Point{ x: 0, y: 0 },
-            color: (0, 0, 0)
+            quit: true,
+            position: Point{ x: 10, y: 15 },
+            color: (255, 0, 255)
         };
         state.process(Message::ChangeColor(255, 0, 255));
         state.process(Message::Echo(String::from("hello world")));
