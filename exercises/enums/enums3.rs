@@ -38,7 +38,7 @@ impl State {
 
     fn process(&mut self, message: Message) {
         match message{
-            Message:: Quit  => {println!("The Quit variant has no data to destructure.")},
+            Message:: Quit  => {println!("The Quit variant has no data to destructure." )},
             Message:: Move{ x,y} => { println!(
                 "Move in the x direction {} and in the y direction {}",
                 x, y
@@ -58,7 +58,7 @@ mod tests {
     fn test_match_message_call() {
         let mut state = State{
             quit: true,
-            position: Point{ x: 10, y: 15 },
+            position: Point{ x: 0, y: 15 },
             color: (255, 0, 255)
         };
         state.process(Message::ChangeColor(255, 0, 255));
