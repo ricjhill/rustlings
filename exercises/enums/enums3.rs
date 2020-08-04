@@ -1,26 +1,30 @@
 // enums3.rs
 // Address all the TODOs to make the tests pass!
 
-// I AM NOT DONE
+
+
 
 enum Message {
-    Quit,Move{x: i32, y: i32 },Echo(String),ChangeColor(i32, i32, i32)
+    Quit,
+    Move{x: i32, y: i32 },
+    Echo(String),
+    ChangeColor(i32, i32, i32)
     // TODO: implement the message variant types based on their usage below
 }
 
 struct Point {
-    x: u8,
-    y: u8
+    x: i32,
+    y: i32
 }
 
 struct State {
-    color: (u8, u8, u8),
+    color: (i32, i32, i32),
     position: Point,
     quit: bool
 }
 
 impl State {
-    fn change_color(&mut self, color: (u8, u8, u8)) {
+    fn change_color(&mut self, color: (i32, i32, i32)) {
         self.color = color;
     }
 
@@ -39,12 +43,9 @@ impl State {
     fn process(&mut self, message: Message) {
         match message{
             Message:: Quit  => {println!("The Quit variant has no data to destructure." )},
-            Message:: Move{ x,y} => { println!(
-                "Move in the x direction {} and in the y direction {}",
-                x, y
-            );} ,
-            Message:: Echo(text) =>println!("Text message: {}", text),
-            Message:: ChangeColor( r,g,b) => println!( "Change the color to red {}, green {}, and blue {}",r, g, b)
+            Message:: Move{ x,y} => self.move_position(Point{ x, y})  ,
+            Message:: Echo(text) => self.echo(text),
+            Message:: ChangeColor( r,g,b) => self.change_color( (r, g, b) )
         }
         // TODO: create a match expression to process the different message variants
     }
